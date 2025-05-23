@@ -1,49 +1,78 @@
-DROP TABLE IF EXISTS grade;
-DROP TABLE IF EXISTS lesson;
-DROP TABLE IF EXISTS student;
-DROP TABLE IF EXISTS subject;
-DROP TABLE IF EXISTS teacher;
-DROP TABLE IF EXISTS school_class;
+DROP INDEX IF EXISTS idx_lessons_subject_id;
+DROP INDEX IF EXISTS idx_lessons_teacher_id;
+DROP INDEX IF EXISTS idx_lessons_group_id;
+DROP INDEX IF EXISTS idx_grades_student_id;
+DROP INDEX IF EXISTS idx_grades_lesson_id;
+DROP INDEX IF EXISTS idx_students_group_id;
+
+DROP TABLE IF EXISTS grades;
+DROP TABLE IF EXISTS lessons;
+DROP TABLE IF EXISTS subjects;
+DROP TABLE IF EXISTS teachers;
+DROP TABLE IF EXISTS students;
+DROP TABLE IF EXISTS groups;
+
+DROP TYPE IF EXISTS grade_value;
 
 
-CREATE TABLE school_class (
-    school_class_id SERIAL PRIMARY KEY,
-    name VARCHAR(20) NOT NULL
+CREATE TYPE grade_value AS ENUM (
+    '1',
+    '2',
+    '3',
+    '4',
+    '5',
+    '6'
 );
 
-CREATE TABLE student (
-    student_id SERIAL PRIMARY KEY,
+
+CREATE TABLE groups (
+    id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    name VARCHAR(10) NOT NULL UNIQUE, -- '1A', '2B'
+    archived BOOLEAN NOT NULL DEFAULT FALSE
+);
+
+CREATE TABLE students (
+    id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     first_name VARCHAR(50) NOT NULL,
     last_name VARCHAR(50) NOT NULL,
-    birth_date DATE NOT NULL,
-    school_class_id INT NOT NULL REFERENCES school_class(school_class_id)
+    group_id BIGINT REFERENCES groups(id) ON DELETE RESTRICT,
+    archived BOOLEAN NOT NULL DEFAULT FALSE
 );
 
-CREATE TABLE teacher (
-    teacher_id SERIAL PRIMARY KEY,
+CREATE TABLE teachers (
+    id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     first_name VARCHAR(50) NOT NULL,
     last_name VARCHAR(50) NOT NULL,
-    specialization VARCHAR(100)
+    archived BOOLEAN NOT NULL DEFAULT FALSE
 );
 
-CREATE TABLE subject (
-    subject_id SERIAL PRIMARY KEY,
-    name VARCHAR(100) NOT NULL
+CREATE TABLE subjects (
+    id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    name VARCHAR(100) NOT NULL UNIQUE,
+    archived BOOLEAN NOT NULL DEFAULT FALSE
 );
 
-CREATE TABLE lesson (
-    lesson_id SERIAL PRIMARY KEY,
-    teacher_id INT NOT NULL REFERENCES teacher(teacher_id),
-    subject_id INT NOT NULL REFERENCES subject(subject_id),
-    school_class_id INT NOT NULL REFERENCES school_class(school_class_id),
-    day_of_week VARCHAR(15) NOT NULL,
-    start_time TIME NOT NULL
+CREATE TABLE lessons (
+    id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    subject_id BIGINT NOT NULL REFERENCES subjects(id) ON DELETE RESTRICT,
+    teacher_id BIGINT NOT NULL REFERENCES teachers(id) ON DELETE RESTRICT,
+    group_id BIGINT NOT NULL REFERENCES groups(id) ON DELETE RESTRICT,
+    archived BOOLEAN NOT NULL DEFAULT FALSE
 );
 
-CREATE TABLE grade (
-    grade_id SERIAL PRIMARY KEY,
-    student_id INT NOT NULL REFERENCES student(student_id),
-    lesson_id INT NOT NULL REFERENCES lesson(lesson_id),
-    value NUMERIC(2,1) NOT NULL,
-    grade_date DATE NOT NULL
+CREATE TABLE grades (
+    id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    student_id BIGINT NOT NULL REFERENCES students(id) ON DELETE RESTRICT,
+    lesson_id BIGINT NOT NULL REFERENCES lessons(id) ON DELETE RESTRICT,
+    value grade_value NOT NULL,
+    comment TEXT,
+    archived BOOLEAN NOT NULL DEFAULT FALSE
 );
+
+
+CREATE INDEX idx_lessons_subject_id ON lessons(subject_id);
+CREATE INDEX idx_lessons_teacher_id ON lessons(teacher_id);
+CREATE INDEX idx_lessons_group_id ON lessons(group_id);
+CREATE INDEX idx_grades_student_id ON grades(student_id);
+CREATE INDEX idx_grades_lesson_id ON grades(lesson_id);
+CREATE INDEX idx_students_group_id ON students(group_id);

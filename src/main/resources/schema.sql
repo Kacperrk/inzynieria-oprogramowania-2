@@ -16,12 +16,7 @@ DROP TYPE IF EXISTS grade_value;
 
 
 CREATE TYPE grade_value AS ENUM (
-    '1',
-    '2',
-    '3',
-    '4',
-    '5',
-    '6'
+    'ONE', 'TWO', 'THREE', 'FOUR', 'FIVE', 'SIX'
 );
 
 

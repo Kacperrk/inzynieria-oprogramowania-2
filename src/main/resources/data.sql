@@ -24,6 +24,6 @@ INSERT INTO lessons (subject_id, teacher_id, group_id) VALUES
     (3, 3, 3);
 
 INSERT INTO grades (student_id, lesson_id, value, comment) VALUES
-    (1, 1, '5', 'Bardzo dobra praca domowa'),
-    (2, 2, '3', 'Może być lepiej'),
-    (3, 3, '4', 'Dobre przygotowanie do lekcji');
+    (1, 1, 'FIVE', 'Bardzo dobra praca domowa'),
+    (2, 2, 'THREE', 'Może być lepiej'),
+    (3, 3, 'FOUR', 'Dobre przygotowanie do lekcji');

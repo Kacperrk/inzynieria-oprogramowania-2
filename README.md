@@ -16,6 +16,9 @@ Zapisz i załaduj konfigurację:
 
 source ~/.bashrc
 
+
+mvn -v
+
 ```
 
 

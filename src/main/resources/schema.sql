@@ -12,13 +12,6 @@ DROP TABLE IF EXISTS teachers;
 DROP TABLE IF EXISTS students;
 DROP TABLE IF EXISTS groups;
 
-DROP TYPE IF EXISTS grade_value;
-
-
-CREATE TYPE grade_value AS ENUM (
-    'ONE', 'TWO', 'THREE', 'FOUR', 'FIVE', 'SIX'
-);
-
 
 CREATE TABLE groups (
     id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
@@ -59,7 +52,7 @@ CREATE TABLE grades (
     id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     student_id BIGINT NOT NULL REFERENCES students(id) ON DELETE RESTRICT,
     lesson_id BIGINT NOT NULL REFERENCES lessons(id) ON DELETE RESTRICT,
-    value grade_value NOT NULL,
+    value VARCHAR(20) NOT NULL DEFAULT 'ONE', -- enum: 'ONE', 'TWO', 'THREE', 'FOUR', 'FIVE', 'SIX'
     comment TEXT,
     archived BOOLEAN NOT NULL DEFAULT FALSE
 );

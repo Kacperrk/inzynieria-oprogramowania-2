@@ -1,0 +1,45 @@
+### Get all lessons
+GET http://localhost:8080/api/lessons
+Accept: application/json
+
+### Get lesson by ID
+GET http://localhost:8080/api/lessons/1
+Accept: application/json
+
+### Create new lesson
+POST http://localhost:8080/api/lessons
+Content-Type: application/json
+
+{
+  "subject": {
+    "id": 1
+  },
+  "teacher": {
+    "id": 2
+  },
+  "group": {
+    "id": 3
+  },
+  "archived": false
+}
+
+### Update lesson
+PUT http://localhost:8080/api/lessons/1
+Content-Type: application/json
+
+{
+  "id": 1,
+  "subject": {
+    "id": 3
+  },
+  "teacher": {
+    "id": 1
+  },
+  "group": {
+    "id": 2
+  },
+  "archived": true
+}
+
+### Delete lesson
+DELETE http://localhost:8080/api/lessons/1

@@ -1,0 +1,29 @@
+### Get all subjects
+GET http://localhost:8080/api/subjects
+Accept: application/json
+
+### Get subject by ID
+GET http://localhost:8080/api/subjects/1
+Accept: application/json
+
+### Create new subject
+POST http://localhost:8080/api/subjects
+Content-Type: application/json
+
+{
+  "name": "Chemia",
+  "archived": false
+}
+
+### Update subject
+PUT http://localhost:8080/api/subjects/1
+Content-Type: application/json
+
+{
+  "id": 1,
+  "name": "Matematyka",
+  "archived": true
+}
+
+### Delete subject
+DELETE http://localhost:8080/api/subjects/1

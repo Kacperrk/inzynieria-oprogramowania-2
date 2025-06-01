@@ -1,0 +1,43 @@
+### Get all grades
+GET http://localhost:8080/api/grades
+Accept: application/json
+
+### Get grade by ID
+GET http://localhost:8080/api/grades/1
+Accept: application/json
+
+### Create new grade
+POST http://localhost:8080/api/grades
+Content-Type: application/json
+
+{
+  "student": {
+    "id": 1
+  },
+  "lesson": {
+    "id": 1
+  },
+  "value": "SIX",
+  "comment": "Wybitna praca",
+  "archived": false
+}
+
+### Update grade
+PUT http://localhost:8080/api/grades/1
+Content-Type: application/json
+
+{
+  "id": 1,
+  "student": {
+    "id": 2
+  },
+  "lesson": {
+    "id": 2
+  },
+  "value": "FIVE",
+  "comment": "Poprawiona ocena",
+  "archived": true
+}
+
+### Delete grade
+DELETE http://localhost:8080/api/grades/1

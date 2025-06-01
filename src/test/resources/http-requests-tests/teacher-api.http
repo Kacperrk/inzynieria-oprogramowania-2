@@ -1,0 +1,31 @@
+### Get all teachers
+GET http://localhost:8080/api/teachers
+Accept: application/json
+
+### Get teacher by ID
+GET http://localhost:8080/api/teachers/1
+Accept: application/json
+
+### Create new teacher
+POST http://localhost:8080/api/teachers
+Content-Type: application/json
+
+{
+  "firstName": "Katarzyna",
+  "lastName": "Mazur",
+  "archived": false
+}
+
+### Update teacher
+PUT http://localhost:8080/api/teachers/1
+Content-Type: application/json
+
+{
+  "id": 1,
+  "firstName": "Maria",
+  "lastName": "Zielińska",
+  "archived": true
+}
+
+### Delete teacher
+DELETE http://localhost:8080/api/teachers/1

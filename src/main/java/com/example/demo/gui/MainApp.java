@@ -1,8 +1,8 @@
 package com.example.demo.gui;
 
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 public class MainApp extends Application {
@@ -12,11 +12,18 @@ public class MainApp extends Application {
     }
 
     @Override
-    public void start(Stage stage) {
-        Label label = new Label("JavaFX GUI działa!");
-        Scene scene = new Scene(label, 300, 200);
-        stage.setTitle("JavaFX App");
-        stage.setScene(scene);
-        stage.show();
+    public void start(Stage primaryStage) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/StudentView.fxml"));
+            Scene scene = new Scene(loader.load());
+
+            primaryStage.setTitle("System szkolny – Studenci");
+            primaryStage.setScene(scene);
+            primaryStage.setResizable(false);
+            primaryStage.show();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

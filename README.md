@@ -13,6 +13,8 @@ mvn spring-boot:run
 
 mvn javafx:run
 
+mvn test
+
 
 
 export JAVA_HOME=/home/TU_NAZWA/.jdks/openjdk-23.0.2

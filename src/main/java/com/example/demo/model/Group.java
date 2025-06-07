@@ -13,6 +13,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Group {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -21,5 +22,9 @@ public class Group {
     private String name;
 
     @Column(name = "archived", nullable = false)
-    private boolean archived;
+    private boolean archived = false;
+
+    public String getDisplayName() {
+        return name.toUpperCase();
+    }
 }

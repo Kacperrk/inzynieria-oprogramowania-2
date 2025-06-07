@@ -32,12 +32,12 @@ public class PrincipalController {
     }
 
     @PutMapping("/{id}")
-    public Principal update (@PathVariable Long id, @RequestBody Principal updatedPrincipal) {
+    public Principal update(@PathVariable Long id, @RequestBody Principal updatedPrincipal) {
         return principalService.update(id, updatedPrincipal);
     }
 
     @DeleteMapping("/{id}")
-    public void archive (@PathVariable Long id) {
+    public void archive(@PathVariable Long id) {
         principalService.archive(id);
     }
 }

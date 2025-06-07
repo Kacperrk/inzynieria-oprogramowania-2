@@ -27,6 +27,10 @@ public class Student {
     @JoinColumn(name = "group_id", nullable = false)
     private Group group;
 
+    @ManyToOne
+    @JoinColumn(name = "parent_id")
+    private Parent parent;
+    
     @Column(name = "archived", nullable = false)
     private boolean archived;
 }

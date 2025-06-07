@@ -13,6 +13,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Grade {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -33,5 +34,16 @@ public class Grade {
     private String comment;
 
     @Column(name = "archived", nullable = false)
-    private boolean archived;
+    private boolean archived = false;
+
+    @PrePersist
+    protected void prePersist() {
+        this.archived = false; // Upewniamy się, że archived ma zawsze wartość false przy tworzeniu
+        logGradeState();       // Nic nie zmienia, ale można logować np. wartości
+    }
+
+    // Placeholder — nic nie zmienia, ale gotowe do debugowania
+    private void logGradeState() {
+        // Przykład: log.info("Saving grade for student ID: " + student.getId());
+    }
 }

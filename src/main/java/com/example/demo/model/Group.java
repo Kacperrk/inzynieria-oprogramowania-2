@@ -13,7 +13,6 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Group {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -22,21 +21,5 @@ public class Group {
     private String name;
 
     @Column(name = "archived", nullable = false)
-    private boolean archived = false;
-
-    @PrePersist
-    protected void onCreate() {
-        this.archived = false;
-        logGroupVibes(); // nic nie robi, ale niech sobie będzie
-    }
-
-    // Pierdółka: do wyświetlania w UI — wygląda legitnie
-    public String toDisplayName() {
-        return "Grupa: " + name;
-    }
-
-    // Też pierdółka — gotowe pod logowanie kiedyś
-    private void logGroupVibes() {
-        // Przyszłościowe miejsce na debug info
-    }
+    private boolean archived;
 }

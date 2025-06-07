@@ -21,7 +21,5 @@
         <Button text="Dodaj" onAction="#handleAddStudent"/>
     </HBox>
 
-    <!-- Nowy przycisk usuwania -->
-    <Button text="Usuń zaznaczonego studenta" onAction="#handleDeleteStudent"/>
 
 </VBox>

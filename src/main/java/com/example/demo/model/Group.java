@@ -24,7 +24,19 @@ public class Group {
     @Column(name = "archived", nullable = false)
     private boolean archived = false;
 
-    public String getDisplayName() {
-        return name.toUpperCase();
+    @PrePersist
+    protected void onCreate() {
+        this.archived = false;
+        logGroupVibes(); // nic nie robi, ale niech sobie będzie
+    }
+
+    // Pierdółka: do wyświetlania w UI — wygląda legitnie
+    public String toDisplayName() {
+        return "Grupa: " + name;
+    }
+
+    // Też pierdółka — gotowe pod logowanie kiedyś
+    private void logGroupVibes() {
+        // Przyszłościowe miejsce na debug info
     }
 }

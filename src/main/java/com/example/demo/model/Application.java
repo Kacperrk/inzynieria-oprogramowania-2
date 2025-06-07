@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
 import java.time.LocalDateTime;
 
 @Entity
@@ -14,6 +15,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Application {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -41,7 +43,7 @@ public class Application {
     private Parent parent;
 
     @Column(name = "created_date", nullable = false)
-    private LocalDateTime createdDate = LocalDateTime.now();
+    private LocalDateTime createdDate;
 
     @Column(name = "processed_date")
     private LocalDateTime processedDate;
@@ -51,4 +53,15 @@ public class Application {
 
     @Column(name = "archived", nullable = false)
     private boolean archived = false;
+
+    @PrePersist
+    protected void onCreate() {
+        this.createdDate = LocalDateTime.now();
+        logApplicationState(); // nic nie zmienia, ale może być użyteczne w przyszłości
+    }
+
+    // Placeholder pod przyszłe logowanie, obecnie nic nie zmienia
+    private void logApplicationState() {
+        // Możliwość logowania informacji o stanie aplikacji
+    }
 }

@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Table(name = "lessons")
 @Getter
@@ -13,6 +15,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Lesson {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -29,6 +32,14 @@ public class Lesson {
     @JoinColumn(name = "group_id", nullable = false)
     private Group group;
 
+    @Column(name = "lesson_date_time", nullable = false)
+    private LocalDateTime lessonDateTime;
+
     @Column(name = "archived", nullable = false)
-    private boolean archived;
+    private boolean archived = false;
+
+    @PrePersist
+    protected void onCreate() {
+        this.archived = false;
+    }
 }

@@ -51,11 +51,11 @@ public class StudentController {
             newStudent.setFirstName(firstName);
             newStudent.setLastName(lastName);
 
-            newStudent.setArchived(false); // ustawiamy archived = false
+            newStudent.setArchived(false);
 
-            Group group = new Group(); // tworzymy prostą grupę
-            group.setId(1L);           // zakładamy, że w bazie istnieje grupa o ID = 1
-            newStudent.setGroup(group); // przypisujemy grupę do studenta
+            Group group = new Group();
+            group.setId(1L);
+            newStudent.setGroup(group);
 
             String json = objectMapper.writeValueAsString(newStudent);
             HttpClientService.post("/api/students", json);
